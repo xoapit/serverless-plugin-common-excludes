@@ -23,6 +23,7 @@ module.exports = class CommonExcludes {
     service.package = service.package || {};
     service.package.patterns = service.package.patterns || [];
 
+    const patterns = []
     const set = new Set(service.package.patterns);
 
     [
@@ -109,7 +110,10 @@ module.exports = class CommonExcludes {
       if (set.has(pattern)) {
         return;
       }
-      service.package.patterns.push(pattern);
+      patterns.push(pattern);
     });
+
+    patterns.push(...service.package.patterns);
+    service.package.patterns = patterns;
   }
 };
